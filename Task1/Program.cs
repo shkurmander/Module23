@@ -25,10 +25,14 @@ namespace Task1
 
         static string[] GetAllStudents(Classroom[] classes)
         {
-            var allStudents = (from cl in classes
-                               select cl.Students into studList
-                               from student in studList
-                               select student).ToArray();
+            //Вариант с полным query синтаксисом
+            //var allStudents = (from cl in classes
+            //                   select cl.Students into studList
+            //                   from student in studList
+            //                   select student).ToArray();
+            
+            //вариант через методы расширения
+            var allStudents = classes.SelectMany(s => s.Students).ToArray();
             return allStudents;
         }
 
